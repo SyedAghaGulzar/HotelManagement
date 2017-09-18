@@ -2,17 +2,22 @@ package com.codentech.mars2.room;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+
 import org.hibernate.annotations.Type;
 
 @Entity
 public class Room {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "room_generator")
+	@SequenceGenerator(name="room_generator", sequenceName = "room_seq",initialValue=1, allocationSize=1)
+	@Column(name="id",nullable=false,updatable=false)
 	private Integer id;
 	
 	private String number;
