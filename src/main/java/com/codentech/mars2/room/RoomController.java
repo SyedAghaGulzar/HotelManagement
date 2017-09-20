@@ -47,9 +47,8 @@ public class RoomController {
 	
 	@RequestMapping(method=RequestMethod.PUT,consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Room> updateRoom(@RequestBody Room room ) {
-		System.out.println(room);
 		room = roomService.update(room);
-		System.out.println("\n\n"+room);
+
 		if (room == null)
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		
