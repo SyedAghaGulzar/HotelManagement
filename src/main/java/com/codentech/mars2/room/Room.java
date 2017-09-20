@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
 import org.hibernate.annotations.Type;
+import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
 public class Room {
@@ -28,8 +29,10 @@ public class Room {
 	
 	private String status; // change String to Enum
 	
+	@Column(columnDefinition = "text")
 	private String notes;
 	
+	@LastModifiedDate
 	private LocalDate lastCheckout;
 	
 	@Type(type="yes_no")
