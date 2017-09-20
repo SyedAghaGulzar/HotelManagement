@@ -74,45 +74,6 @@ public class Employee {
 	@Type(type = "yes_no")
 	private Boolean isDeleted;
 
-	public Employee(Integer id, String login, String name, String fatherName, String workMobile, String homeMobile,
-			String address, String city, String state, String zip, String country, String gender, String notes,
-			String religion, String married, String designation, boolean sales, LocalDate startDate, LocalDate endDate,
-			LocalDate blockDate, String ssn, LocalDate dob, int payPeriod, String restrictDepartment,
-			String restrictWarehouse, String restrictAccounts, String restrictGroups, String shift, String cnic,
-			Boolean isDeleted) {
-		super();
-		this.id = id;
-		this.login = login;
-		this.name = name;
-		this.fatherName = fatherName;
-		this.workMobile = workMobile;
-		this.homeMobile = homeMobile;
-		this.address = address;
-		this.city = city;
-		this.state = state;
-		this.zip = zip;
-		this.country = country;
-		this.gender = gender;
-		this.notes = notes;
-		this.religion = religion;
-		this.married = married;
-		this.designation = designation;
-		this.sales = sales;
-		this.startDate = startDate;
-		this.endDate = endDate;
-		this.blockDate = blockDate;
-		this.ssn = ssn;
-		this.dob = dob;
-		this.payPeriod = payPeriod;
-		this.restrictDepartment = restrictDepartment;
-		this.restrictWarehouse = restrictWarehouse;
-		this.restrictAccounts = restrictAccounts;
-		this.restrictGroups = restrictGroups;
-		this.shift = shift;
-		this.cnic = cnic;
-		this.isDeleted = isDeleted;
-	}
-
 	public Integer getId() {
 		return id;
 	}

@@ -13,20 +13,22 @@ public class Customer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
-	private Integer id;
+	private Long id;
 
 	private String type;
 
-	private Employee employeeId;
-
+	private String cnic;
+	
 	private String name;
 
 	private String mobile;
 
+	private String fax;
+
 	private String email;
 
 	private String address;
-
+	
 	private String city;
 
 	private String state;
@@ -38,15 +40,19 @@ public class Customer {
 	private String gender;
 
 	private String notes;
+	
+	private String designation;
+	
+	private String contactPerson;
 
 	@Type(type = "yes_no")
 	private Boolean isDeleted;
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -58,12 +64,12 @@ public class Customer {
 		this.type = type;
 	}
 
-	public Employee getEmployeeId() {
-		return employeeId;
+	public String getCnic() {
+		return cnic;
 	}
 
-	public void setEmployeeId(Employee employeeId) {
-		this.employeeId = employeeId;
+	public void setCnic(String cnic) {
+		this.cnic = cnic;
 	}
 
 	public String getName() {
@@ -80,6 +86,14 @@ public class Customer {
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+
+	public String getFax() {
+		return fax;
+	}
+
+	public void setFax(String fax) {
+		this.fax = fax;
 	}
 
 	public String getEmail() {
@@ -146,6 +160,22 @@ public class Customer {
 		this.notes = notes;
 	}
 
+	public String getDesignation() {
+		return designation;
+	}
+
+	public void setDesignation(String designation) {
+		this.designation = designation;
+	}
+
+	public String getContactPerson() {
+		return contactPerson;
+	}
+
+	public void setContactPerson(String contactPerson) {
+		this.contactPerson = contactPerson;
+	}
+
 	public Boolean getIsDeleted() {
 		return isDeleted;
 	}
@@ -153,6 +183,5 @@ public class Customer {
 	public void setIsDeleted(Boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
-
-
+	
 }

@@ -14,7 +14,7 @@ public class ReservationService {
 		return reservationRepository.findAll();
 	}
 
-	public Reservation findOne(Integer id) {
+	public Reservation findOne(Long id) {
 		return reservationRepository.findOne(id);
 	}
 
@@ -38,7 +38,7 @@ public class ReservationService {
 		
 	}
 	
-	public void delete(Integer id) {
+	public void delete(Long id) {
 		reservationRepository.delete(id);
 	}
 }

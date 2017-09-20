@@ -25,7 +25,7 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(path="/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Customer> getCustomer(@PathVariable Integer id) {
+	public ResponseEntity<Customer> getCustomer(@PathVariable Long id) {
 		
 		Customer customer = customerService.findOne(id);
 		if (customer == null)
@@ -57,7 +57,7 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(path="/{id}",method=RequestMethod.DELETE,produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Customer> deleteCustomer(@PathVariable Integer id) {
+	public ResponseEntity<Customer> deleteCustomer(@PathVariable Long id) {
 
 		customerService.delete(id);
 		return new ResponseEntity<Customer>(HttpStatus.NO_CONTENT);

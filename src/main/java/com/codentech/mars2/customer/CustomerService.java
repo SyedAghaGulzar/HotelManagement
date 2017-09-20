@@ -14,7 +14,7 @@ public class CustomerService {
 		return customerRepository.findAll();
 	}
 
-	public Customer findOne(Integer id) {
+	public Customer findOne(Long id) {
 		return customerRepository.findOne(id);
 	}
 
@@ -38,7 +38,7 @@ public class CustomerService {
 		
 	}
 	
-	public void delete(Integer id) {
+	public void delete(Long id) {
 		customerRepository.delete(id);
 	}
 }

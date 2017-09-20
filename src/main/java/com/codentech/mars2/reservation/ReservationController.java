@@ -18,46 +18,46 @@ public class ReservationController {
 
 	@Autowired
 	private ReservationService reservationService;
-	
-	@RequestMapping(method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
+
+	@RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Reservation>> getReservations() {
-		return new ResponseEntity<List<Reservation>>(reservationService.findAll(),HttpStatus.OK);
+		return new ResponseEntity<List<Reservation>>(reservationService.findAll(), HttpStatus.OK);
 	}
-	
-	@RequestMapping(path="/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Reservation> getReservation(@PathVariable Integer id) {
-		
+
+	@RequestMapping(path = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Reservation> getReservation(@PathVariable Long id) {
+
 		Reservation reservation = reservationService.findOne(id);
 		if (reservation == null)
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		
-		return new ResponseEntity<Reservation>(reservation,HttpStatus.OK);
+
+		return new ResponseEntity<Reservation>(reservation, HttpStatus.OK);
 	}
-	
-	@RequestMapping(method=RequestMethod.POST,consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation ) {
-		
+
+	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
+
 		reservation = reservationService.save(reservation);
-		
+
 		if (reservation == null)
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		
-		return new ResponseEntity<>(reservation,HttpStatus.CREATED);
+
+		return new ResponseEntity<>(reservation, HttpStatus.CREATED);
 	}
-	
-	@RequestMapping(method=RequestMethod.PUT,consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Reservation> updateReservation(@RequestBody Reservation reservation ) {
+
+	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Reservation> updateReservation(@RequestBody Reservation reservation) {
 		System.out.println(reservation);
 		reservation = reservationService.update(reservation);
-		System.out.println("\n\n"+reservation);
+		System.out.println("\n\n" + reservation);
 		if (reservation == null)
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		
-		return new ResponseEntity<>(reservation,HttpStatus.OK);
+
+		return new ResponseEntity<>(reservation, HttpStatus.OK);
 	}
-	
-	@RequestMapping(path="/{id}",method=RequestMethod.DELETE,produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Reservation> deleteReservation(@PathVariable Integer id) {
+
+	@RequestMapping(path = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Reservation> deleteReservation(@PathVariable Long id) {
 
 		reservationService.delete(id);
 		return new ResponseEntity<Reservation>(HttpStatus.NO_CONTENT);

@@ -27,7 +27,7 @@ public class Room {
 	
 	private String floor;
 	
-	private RoomType type; 
+	private String type; 
 	
 	private String status; // change String to Enum
 	
@@ -67,11 +67,11 @@ public class Room {
 		this.floor = floor;
 	}
 
-	public RoomType getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(RoomType type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 

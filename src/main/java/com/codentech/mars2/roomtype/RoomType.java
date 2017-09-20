@@ -17,30 +17,17 @@ public class RoomType {
 	
 	private String description;
 	
-	private int singleRooms;
+	private Integer singleRooms;
 	
-	private int doubleRooms;
+	private Integer doubleRooms;
 	
-	private int tripleRooms;
+	private Integer tripleRooms;
 	
 	@Type(type="yes_no")
 	private Boolean isActive;
 	
 	@Type(type="yes_no")
 	private Boolean isDeleted;
-
-	public RoomType(Integer id, String type, String description, int singleRooms, int doubleRooms, int tripleRooms,
-			Boolean isActive, Boolean isDeleted) {
-		super();
-		this.id = id;
-		this.type = type;
-		this.description = description;
-		this.singleRooms = singleRooms;
-		this.doubleRooms = doubleRooms;
-		this.tripleRooms = tripleRooms;
-		this.isActive = isActive;
-		this.isDeleted = isDeleted;
-	}
 
 	public Integer getId() {
 		return id;
@@ -113,6 +100,4 @@ public class RoomType {
 				+ ", isDeleted=" + isDeleted + "]";
 	}
 	
-	
-
 }
