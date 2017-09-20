@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import org.hibernate.annotations.Type;
 
+import com.codentech.mars2.roomtype.RoomType;
+
 @Entity
 public class Room {
 	
@@ -19,7 +21,7 @@ public class Room {
 	
 	private String floor;
 	
-	private String type; // change String to RoomType
+	private RoomType type; 
 	
 	private String status; // change String to Enum
 	
@@ -57,11 +59,11 @@ public class Room {
 		this.floor = floor;
 	}
 
-	public String getType() {
+	public RoomType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(RoomType type) {
 		this.type = type;
 	}
 
@@ -105,11 +107,5 @@ public class Room {
 		this.isDeleted = isDeleted;
 	}
 
-	@Override
-	public String toString() {
-		return "Room [id=" + id + ", number=" + number + ", floor=" + floor + ", type=" + type + ", status=" + status
-				+ ", notes=" + notes + ", lastCheckout=" + lastCheckout + ", isActive=" + isActive + ", isDeleted="
-				+ isDeleted + "]";
-	}
 
 }
