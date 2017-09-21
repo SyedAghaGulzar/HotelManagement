@@ -3,14 +3,19 @@ package com.codentech.mars2.reservation;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Type;
 
 import com.codentech.mars2.customer.Customer;
-import com.codentech.mars2.employee.Employee;
 import com.codentech.mars2.room.Room;
 
 @Entity
@@ -20,11 +25,15 @@ public class Reservation {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
-	private Integer roomId; 
+	@ManyToOne(fetch=FetchType.EAGER,optional=false)
+	@JoinColumn(name="roomId")
+	private Room room; 
 	
 	private Double roomRate;
 	
-	private Integer customerId;
+	@ManyToOne(fetch=FetchType.EAGER,optional=false)
+	@JoinColumn(name="customerId")
+	private Customer customer;
 	
 	private String resStatus;
 	
@@ -62,12 +71,12 @@ public class Reservation {
 		this.id = id;
 	}
 
-	public Integer getRoomId() {
-		return roomId;
+	public Room getRoom() {
+		return room;
 	}
 
-	public void setRoomId(Integer roomId) {
-		this.roomId = roomId;
+	public void setRoom(Room roomId) {
+		this.room = roomId;
 	}
 
 	public Double getRoomRate() {
@@ -78,12 +87,12 @@ public class Reservation {
 		this.roomRate = roomRate;
 	}
 
-	public Integer getCustomerId() {
-		return customerId;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public void setCustomerId(Integer customerId) {
-		this.customerId = customerId;
+	public void setCustomer(Customer customerId) {
+		this.customer = customerId;
 	}
 
 	public String getResStatus() {

@@ -4,15 +4,25 @@ import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Type;
 import org.springframework.data.annotation.LastModifiedDate;
 
-import com.codentech.mars2.roomtype.RoomType;
+import com.codentech.mars2.enumeration.RoomStatus;
+import com.codentech.mars2.room.type.RoomType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
 public class Room {
@@ -23,13 +33,20 @@ public class Room {
 	@Column(name="id",nullable=false,updatable=false)
 	private Integer id;
 	
+	@Column(unique=true,nullable=false,columnDefinition="varchar(10)")
 	private String number;
 	
+	@Column(columnDefinition="varchar(20)")
 	private String floor;
 	
-	private String type; 
+	//@Fetch(FetchMode.JOIN)
+	@ManyToOne(fetch=FetchType.LAZY,optional=false)
+	@JoinColumn(name="roomtype_id")
+	private RoomType roomType; 
 	
-	private String status; // change String to Enum
+	@JsonInclude(JsonInclude.Include.NON_NULL)
+	@Enumerated(EnumType.STRING)
+	private RoomStatus status; // change String to Enum
 	
 	@Column(columnDefinition = "text")
 	private String notes;
@@ -66,20 +83,20 @@ public class Room {
 	public void setFloor(String floor) {
 		this.floor = floor;
 	}
-
-	public String getType() {
-		return type;
+	
+	public RoomType getRoomType() {
+		return roomType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setRoomType(RoomType type) {
+		this.roomType = type;
 	}
 
-	public String getStatus() {
+	public RoomStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(RoomStatus status) {
 		this.status = status;
 	}
 

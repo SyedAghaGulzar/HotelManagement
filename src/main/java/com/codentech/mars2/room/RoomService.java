@@ -1,44 +1,47 @@
 package com.codentech.mars2.room;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RoomService {
 
 	@Autowired
-	private RoomRepository roomRepository;
-	
+	private RoomRepository roomRepo;
+
 	public List<Room> findAll() {
-		return roomRepository.findAll();
+		return roomRepo.findAll();
 	}
 
-	public Room findOne(Integer id) {
-		return roomRepository.findOne(id);
+	//@Transactional(readOnly=true)
+	public Room findOne(Integer id, Optional<?> data) {
+		
+		if(data.isPresent()) {
+			return roomRepo.findOneEL(id);
+		}
+
+		return roomRepo.findOne(id);
 	}
 
 	public Room save(Room room) {
-		
 		if (room.getId() != null) {
-			// cannot create room with given id value
 			return null;
 		}
-		return roomRepository.save(room);
-		
+		return roomRepo.save(room);
 	}
-	
+
 	public Room update(Room room) {
-		
-		if(findOne(room.getId()) == null) {
-			// cannot update room with missing id value
+		if (!roomRepo.exists(room.getId())) {
 			return null;
-		}	
-		return roomRepository.save(room);
-		
+		}
+		return roomRepo.save(room);
 	}
-	
+
 	public void delete(Integer id) {
-		roomRepository.delete(id);
+		roomRepo.delete(id);
 	}
 }

@@ -12,6 +12,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.codentech.mars2.customer.Customer;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
+import play.libs.Json;
+
+
+
 @RestController
 @RequestMapping("/reservation")
 public class ReservationController {
@@ -47,9 +56,8 @@ public class ReservationController {
 
 	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Reservation> updateReservation(@RequestBody Reservation reservation) {
-		System.out.println(reservation);
+
 		reservation = reservationService.update(reservation);
-		System.out.println("\n\n" + reservation);
 		if (reservation == null)
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
@@ -62,4 +70,21 @@ public class ReservationController {
 		reservationService.delete(id);
 		return new ResponseEntity<Reservation>(HttpStatus.NO_CONTENT);
 	}
+	
+/*	public ResponseEntity<Reservation> deleteReservation(@RequestBody JsonNode data) {
+		
+		data.findPath("guest").findPath("id").asInt();
+		Json.fromJson(data.findPath("guest"), Customer.class);
+//		Json.toJson(new Customer(1));
+		ObjectNode objectNode = Json.newObject();
+		objectNode.set("room", Json.toJson(new Customer()));
+		objectNode.set("room2", Json.toJson(new Customer()));
+		Json.stringify(objectNode);
+				
+		return new ResponseEntity<>("{ \"room1\": "+ new ObjectMapper().writeValueAsString(roomService.findOne(1))+","
+				+ "\"roomType\":" + new ObjectMapper().writeValueAsString(roomService.findOne(1)) + ","
+				+ "}",HttpStatus.OK);
+	}*/
+	
+	
 }

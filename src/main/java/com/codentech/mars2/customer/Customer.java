@@ -1,12 +1,15 @@
 package com.codentech.mars2.customer;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import org.hibernate.annotations.Type;
 
-import com.codentech.mars2.employee.Employee;
+import com.codentech.mars2.enumeration.CustomerType;
+import com.codentech.mars2.enumeration.Gender;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Customer {
@@ -15,36 +18,47 @@ public class Customer {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
-	private String type;
+	private CustomerType customerType;
 
 	private String cnic;
 	
+	@Column(columnDefinition="varchar(50)")
 	private String name;
 
-	private String mobile;
+	@Column(columnDefinition="varchar(20)")
+	private String phone;
 
-	private String fax;
+	private String fax; // varchar length decision pending
 
+	@Column(columnDefinition="varchar(50)")
 	private String email;
-
+	
 	private String address;
 	
+	@Column(columnDefinition="varchar(30)")
 	private String city;
 
+	@Column(columnDefinition="varchar(30)")
 	private String state;
 
+	@Column(columnDefinition="varchar(20)")
 	private String zip;
 
+	@Column(columnDefinition="varchar(30)")
 	private String country;
 
-	private String gender;
+	private Gender gender;
 
+	@Column(columnDefinition="text")
 	private String notes;
 	
-	private String designation;
+	@Column(columnDefinition="varchar(20)")
+	private String cDesignation;
 	
-	private String contactPerson;
+	@Column(columnDefinition="varchar(50)")
+	private String cContactPerson;
 
+	@JsonIgnore
 	@Type(type = "yes_no")
 	private Boolean isDeleted;
 
@@ -56,12 +70,12 @@ public class Customer {
 		this.id = id;
 	}
 
-	public String getType() {
-		return type;
+	public CustomerType getCustomerType () {
+		return customerType;
 	}
 
-	public void setType(String type) {
-		this.type = type;
+	public void setCustomerType(CustomerType type) {
+		this.customerType = type;
 	}
 
 	public String getCnic() {
@@ -81,11 +95,11 @@ public class Customer {
 	}
 
 	public String getMobile() {
-		return mobile;
+		return phone;
 	}
 
 	public void setMobile(String mobile) {
-		this.mobile = mobile;
+		this.phone = mobile;
 	}
 
 	public String getFax() {
@@ -144,11 +158,11 @@ public class Customer {
 		this.country = country;
 	}
 
-	public String getGender() {
+	public Gender getGender() {
 		return gender;
 	}
 
-	public void setGender(String gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 
@@ -160,20 +174,20 @@ public class Customer {
 		this.notes = notes;
 	}
 
-	public String getDesignation() {
-		return designation;
+	public String getCDesignation() {
+		return cDesignation;
 	}
 
-	public void setDesignation(String designation) {
-		this.designation = designation;
+	public void setCDesignation(String designation) {
+		this.cDesignation = designation;
 	}
 
-	public String getContactPerson() {
-		return contactPerson;
+	public String getCContactPerson() {
+		return cContactPerson;
 	}
 
-	public void setContactPerson(String contactPerson) {
-		this.contactPerson = contactPerson;
+	public void setCContactPerson(String contactPerson) {
+		this.cContactPerson = contactPerson;
 	}
 
 	public Boolean getIsDeleted() {

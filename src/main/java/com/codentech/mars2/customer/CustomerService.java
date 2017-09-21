@@ -3,6 +3,8 @@ package com.codentech.mars2.customer;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class CustomerService {
@@ -36,6 +38,11 @@ public class CustomerService {
 		}	
 		return customerRepository.save(customer);
 		
+	}
+
+	@Transactional(propagation=Propagation.SUPPORTS)
+	public Customer saveOrUpdate(Customer customer) {	
+		return customerRepository.save(customer);
 	}
 	
 	public void delete(Long id) {

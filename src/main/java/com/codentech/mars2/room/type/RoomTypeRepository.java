@@ -1,4 +1,4 @@
-package com.codentech.mars2.roomtype;
+package com.codentech.mars2.room.type;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

@@ -47,11 +47,10 @@ public class CustomerController {
 	
 	@RequestMapping(method=RequestMethod.PUT,consumes=MediaType.APPLICATION_JSON_VALUE,produces=MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer ) {
-		System.out.println(customer);
+
 		customer = customerService.update(customer);
-		System.out.println("\n\n"+customer);
 		if (customer == null)
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		
 		return new ResponseEntity<>(customer,HttpStatus.OK);
 	}
