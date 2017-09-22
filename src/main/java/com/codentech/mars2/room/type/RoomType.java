@@ -28,12 +28,12 @@ public class RoomType {
 	
 	@Type(type="yes_no")
 	@Column(columnDefinition="char default 'Y'")
-	private boolean isActive;
+	private Boolean isActive;
 	
 	@Type(type="yes_no")
 	@Column(columnDefinition="char default 'N'")
 	@JsonIgnore
-	private boolean isDeleted;
+	private Boolean isDeleted;
 
 	public Integer getId() {
 		return id;
@@ -59,19 +59,19 @@ public class RoomType {
 		this.description = description;
 	}
 
-	public boolean getIsActive() {
+	public Boolean getIsActive() {
 		return isActive;
 	}
 
-	public void setIsActive(boolean isActive) {
+	public void setIsActive(Boolean isActive) {
 		this.isActive = isActive;
 	}
 
-	public boolean getIsDeleted() {
+	public Boolean getIsDeleted() {
 		return isDeleted;
 	}
 
-	public void setIsDeleted(boolean isDeleted) {
+	public void setIsDeleted(Boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
 

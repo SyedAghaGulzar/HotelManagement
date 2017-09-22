@@ -34,7 +34,9 @@ public class RoomController {
 		Room room = roomService.findOne(id,data);
 		if (room == null)
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-
+		
+		System.out.println(room);
+		
 		return new ResponseEntity<>(room,HttpStatus.FOUND);
 	
 	}

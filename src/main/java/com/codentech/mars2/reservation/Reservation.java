@@ -11,30 +11,36 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Type;
 
 import com.codentech.mars2.customer.Customer;
 import com.codentech.mars2.room.Room;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 public class Reservation {
 
+	public static final String ROOT_NODE="reservation__";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 
-	@ManyToOne(fetch=FetchType.EAGER,optional=false)
-	@JoinColumn(name="roomId")
-	private Room room; 
+	private Integer roomId; 
 	
 	private Double roomRate;
 	
-	@ManyToOne(fetch=FetchType.EAGER,optional=false)
-	@JoinColumn(name="customerId")
-	private Customer customer;
+	private Long customerId;
 	
+	@Transient
+	@JsonIgnore
+	private Customer __customer;
+
 	private String resStatus;
 	
 	private LocalDate resDate;
@@ -71,12 +77,12 @@ public class Reservation {
 		this.id = id;
 	}
 
-	public Room getRoom() {
-		return room;
+	public Integer getRoomId() {
+		return roomId;
 	}
 
-	public void setRoom(Room roomId) {
-		this.room = roomId;
+	public void setRoomId(Integer roomId) {
+		this.roomId = roomId;
 	}
 
 	public Double getRoomRate() {
@@ -87,12 +93,23 @@ public class Reservation {
 		this.roomRate = roomRate;
 	}
 
-	public Customer getCustomer() {
-		return customer;
+	@JsonProperty
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	public Long getCustomerId() {
+		return customerId;
 	}
 
-	public void setCustomer(Customer customerId) {
-		this.customer = customerId;
+	@JsonIgnore
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
+	}
+	
+	public Customer get__customer() {
+		return __customer;
+	}
+	
+	public void set__customer(Customer __customer) {
+		this.__customer = __customer;
 	}
 
 	public String getResStatus() {

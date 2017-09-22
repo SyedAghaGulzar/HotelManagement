@@ -11,7 +11,7 @@ public class CustomerService {
 
 	@Autowired
 	private CustomerRepository customerRepository;
-	
+
 	public List<Customer> findAll() {
 		return customerRepository.findAll();
 	}
@@ -21,30 +21,26 @@ public class CustomerService {
 	}
 
 	public Customer save(Customer customer) {
-		
+
 		if (customer.getId() != null) {
-			// cannot create room with given id value
 			return null;
 		}
 		return customerRepository.save(customer);
-		
-	}
-	
-	public Customer update(Customer customer) {
-		
-		if(findOne(customer.getId()) == null) {
-			// cannot update room with missing id value
-			return null;
-		}	
-		return customerRepository.save(customer);
-		
+
 	}
 
-	@Transactional(propagation=Propagation.SUPPORTS)
-	public Customer saveOrUpdate(Customer customer) {	
+	public Customer update(Customer customer) {
+		if (customer.getId() != null && !customerRepository.exists(customer.getId())) {
+			throw new RuntimeException("Customer with given Id doesn't exist");
+		}
 		return customerRepository.save(customer);
 	}
-	
+
+	@Transactional(propagation = Propagation.SUPPORTS)
+	public Customer saveOrUpdate(Customer customer) {
+		return customer.getId() == null ? save(customer) : update(customer);
+	}
+
 	public void delete(Long id) {
 		customerRepository.delete(id);
 	}

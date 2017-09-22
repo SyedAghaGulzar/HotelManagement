@@ -7,12 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.codentech.mars2.room.type.RoomTypeService;
+
 @Service
 public class RoomService {
 
 	@Autowired
 	private RoomRepository roomRepo;
 
+	@Autowired
+	private RoomTypeService rtService;
+	
 	public List<Room> findAll() {
 		return roomRepo.findAll();
 	}
@@ -20,11 +25,13 @@ public class RoomService {
 	//@Transactional(readOnly=true)
 	public Room findOne(Integer id, Optional<?> data) {
 		
-		if(data.isPresent()) {
-			return roomRepo.findOneEL(id);
+		Room room = roomRepo.findOne(id);
+		
+		if(room !=null && data.isPresent()) {
+			room.set__roomType(rtService.findOne(room.getRoomTypeId()));
 		}
 
-		return roomRepo.findOne(id);
+		return room;
 	}
 
 	public Room save(Room room) {

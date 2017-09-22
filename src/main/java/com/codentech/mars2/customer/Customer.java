@@ -14,6 +14,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class Customer {
 
+	public static final String ROOT_NODE="customer__";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;

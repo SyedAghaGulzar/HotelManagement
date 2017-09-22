@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RoomRepository extends JpaRepository<Room,Integer>{
 
-	@Query("From Room r join fetch r.roomType where r.id = ?1")
-	public Room findOneEL(Integer id);
+	/*@Query("From Room r join fetch r.roomType where r.id = ?1")
+	public Room findOneEL(Integer id);*/
 	
 }

@@ -28,7 +28,6 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Room {
 	
 	@Id
@@ -43,18 +42,15 @@ public class Room {
 	@Column(columnDefinition="varchar(20)")
 	private String floor;
 	
-	//@Transient
-	@Column(name="roomtype_id",updatable=false,insertable=false)
-	@JsonIgnore
+	@Column(name="roomtype_id")
 	private Integer roomTypeId; 
-
-	@ManyToOne(fetch=FetchType.LAZY,optional=false)
-	@JoinColumn(name="roomtype_id")
-	@JsonInclude(JsonInclude.Include.NON_EMPTY)
-	private RoomType roomType; 
+	
+	@Transient
+	@JsonIgnore
+	private RoomType __roomType;
 	
 	@Enumerated(EnumType.STRING)
-	private RoomStatus status; // change String to Enum
+	private RoomStatus status;
 	
 	@Column(columnDefinition = "text")
 	private String notes;
@@ -91,13 +87,24 @@ public class Room {
 	public void setFloor(String floor) {
 		this.floor = floor;
 	}
-	
-	public RoomType getRoomType() {
-		return roomType;
+
+	public Integer getRoomTypeId() {
+		return roomTypeId;
 	}
 
-	public void setRoomType(RoomType type) {
-		this.roomType = type;
+	public void setRoomTypeId(Integer roomTypeId) {
+		this.roomTypeId = roomTypeId;
+	}
+
+	@JsonProperty
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
+	public RoomType get__roomType() {
+		return __roomType;
+	}
+	
+	@JsonIgnore
+	public void set__roomType(RoomType __roomType) {
+		this.__roomType = __roomType;
 	}
 
 	public RoomStatus getStatus() {
@@ -139,16 +146,4 @@ public class Room {
 	public void setIsDeleted(Boolean isDeleted) {
 		this.isDeleted = isDeleted;
 	}
-
-	@JsonProperty("__roomType__id")
-	public Integer getRoomTypeId() {
-		return roomTypeId;
-	}
-
-	@JsonIgnore
-	public void setRoomTypeId(Integer roomTypeId) {
-		this.roomTypeId = roomTypeId;
-	}
-
-
 }

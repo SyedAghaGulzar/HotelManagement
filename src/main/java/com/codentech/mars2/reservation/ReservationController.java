@@ -44,9 +44,9 @@ public class ReservationController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation) {
+	public ResponseEntity<?> createReservation(@RequestBody JsonNode jsonNode) {
 
-		reservation = reservationService.save(reservation);
+		Reservation reservation = reservationService.save(jsonNode);
 
 		if (reservation == null)
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -55,9 +55,9 @@ public class ReservationController {
 	}
 
 	@RequestMapping(method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Reservation> updateReservation(@RequestBody Reservation reservation) {
+	public ResponseEntity<?> updateReservation(@RequestBody JsonNode jsonNode) {
 
-		reservation = reservationService.update(reservation);
+		Reservation reservation = reservationService.update(jsonNode);
 		if (reservation == null)
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
