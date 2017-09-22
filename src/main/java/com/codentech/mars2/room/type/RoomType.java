@@ -5,16 +5,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+//import javax.persistence.Access;
+//import org.hibernate.annotations.AccessType;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class RoomType {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
+	//@Access(AccessType.PROPERTY)
 	private Integer id;
 	
 	@Column(columnDefinition="varchar(20)")

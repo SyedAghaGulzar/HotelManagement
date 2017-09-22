@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -21,10 +22,13 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import com.codentech.mars2.enumeration.RoomStatus;
 import com.codentech.mars2.room.type.RoomType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Room {
 	
 	@Id
@@ -39,12 +43,16 @@ public class Room {
 	@Column(columnDefinition="varchar(20)")
 	private String floor;
 	
-	//@Fetch(FetchMode.JOIN)
+	//@Transient
+	@Column(name="roomtype_id",updatable=false,insertable=false)
+	@JsonIgnore
+	private Integer roomTypeId; 
+
 	@ManyToOne(fetch=FetchType.LAZY,optional=false)
 	@JoinColumn(name="roomtype_id")
+	@JsonInclude(JsonInclude.Include.NON_EMPTY)
 	private RoomType roomType; 
 	
-	@JsonInclude(JsonInclude.Include.NON_NULL)
 	@Enumerated(EnumType.STRING)
 	private RoomStatus status; // change String to Enum
 	
@@ -130,6 +138,16 @@ public class Room {
 
 	public void setIsDeleted(Boolean isDeleted) {
 		this.isDeleted = isDeleted;
+	}
+
+	@JsonProperty("__roomType__id")
+	public Integer getRoomTypeId() {
+		return roomTypeId;
+	}
+
+	@JsonIgnore
+	public void setRoomTypeId(Integer roomTypeId) {
+		this.roomTypeId = roomTypeId;
 	}
 
 
