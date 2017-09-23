@@ -43,11 +43,11 @@ public class RoomType {
 		this.id = id;
 	}
 
-	public String getType() {
+	public String getName() {
 		return name;
 	}
 
-	public void setType(String type) {
+	public void setName(String type) {
 		this.name = type;
 	}
 

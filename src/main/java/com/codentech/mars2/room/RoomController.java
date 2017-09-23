@@ -24,8 +24,8 @@ public class RoomController {
 	private RoomService roomService;
 	
 	@RequestMapping(method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Room>> getRooms() {
-		return new ResponseEntity<List<Room>>(roomService.findAll(),HttpStatus.OK);
+	public ResponseEntity<?> getRooms() {
+		return new ResponseEntity<>(roomService.findAll(),HttpStatus.OK);
 	}
 	
 	@RequestMapping(path="/{id}",method=RequestMethod.GET,produces=MediaType.APPLICATION_JSON_VALUE)
