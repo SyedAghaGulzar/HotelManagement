@@ -10,6 +10,7 @@ import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 
 @SpringBootApplication
 @Configuration
+@ComponentScan(basePackages="com.codentech.mars2")
 public class Mars2Application {
 
 /*	=============================================
